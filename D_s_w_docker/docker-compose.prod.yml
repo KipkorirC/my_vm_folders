@@ -1,0 +1,13 @@
+version: "3.2"
+
+services:
+  python:
+    build: 
+      dockerfile: ./docker/Dockerfile-prod
+      context: ./
+    image: webscraper_python
+    env_file:
+      - .env
+
+    command:
+        python /code/test.py

@@ -1,0 +1,11 @@
+FROM continuumio/miniconda3
+
+COPY ./docker/environment.yml /
+
+RUN conda update -n base conda -y && conda env update
+
+ADD ./code /code
+ADD ./notebooks /notebooks
+ADD ./data /data
+
+

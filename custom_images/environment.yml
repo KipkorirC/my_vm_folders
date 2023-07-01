@@ -1,0 +1,12 @@
+name: minimalds
+
+
+channels:
+  - conda-forge
+
+
+dependencies:
+  - psycopg2
+  - pandas
+  - streamlit
+  

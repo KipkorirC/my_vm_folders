@@ -1,0 +1,41 @@
+version: "3.2"
+
+services:
+  Database: 
+    image: postgres
+
+
+    ports:
+      - 5432:5432
+
+    environment:
+    - POSTGRES_DB=testdb
+    - POSTGRES_PASSWORD=password
+    - POSTGRES_USER=testuser
+
+  python:
+    build:
+      dockerfile: ./docker/Dockerfile-dev
+      context: ./
+
+    image: webscraper_python
+    env_file:
+      - .env
+
+    ports:
+      - "8888:8888"
+  
+    command:
+      jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token='local_dev'
+  
+
+    volumes:
+      - ./data:/data
+      - ./code:/code
+      - ./notebooks:/notebooks
+
+  firefox:
+    image: selenium/standalone-firefox
+    hostname: firefox
+    ports:
+      - 4444:4444
